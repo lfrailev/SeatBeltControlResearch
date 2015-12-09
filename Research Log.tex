@@ -1,0 +1,68 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\begin{document}
+\title{Research Log}
+\author{Lucas Martin Fraile Vazquez}
+\maketitle
+\subsection{12/4/2015}
+
+First attempt to model the dynamics of the human body during an automotive accident is started. A simplified, two dimensional, head--on collision scenario is chosen.  The passenger body is modeled as an inverted pendulum with masses $m_{o}$ and $m_{u}$ in the top and bottom ends. The three point seat belt is modeled as a Sash seat belt across the chess, which acts over $m_{o}$ and a Lap seat belt which acts over $m_{u}$. Passenger slipping on the seat is accounted for as a displacement of the mass at the lower end, with friction force, between the seat and the passenger, acting against it.
+\\ $ L$ is the length between the passengers hip and center of mass of the torso. $ \theta $ is the clockwise angle defined between the up-straight position of the seat and the passengers back. $ x $ is defined as the horizontal distance between the back of the seat and the passengers hip. The body mass of the passenger over the hip is represented by $m_{o}$ and the mass under the hip by $m_{u}$.
+\\\\Their respective coordinates are:
+\begin{equation}
+m_{o}\ =(Lsin(\theta)+x,Lcos(\theta))
+\end{equation}
+\begin{equation}
+m_{u}\ =(x,0)
+\end{equation}
+Thus their velocities:
+\begin{equation}
+m_{o}\ =(Lcos(\theta)\dfrac{d \theta}{d t} + \dfrac{d x}{d t} ,-Lsin(\theta)\dfrac{d \theta}{d t})
+\end{equation}
+\begin{equation}
+m_{u}\ =(\dfrac{d x}{d t},0)
+\end{equation}
+The Lagrangian is defined as:
+\begin{equation}
+L=T-V
+\end{equation}
+\begin{equation}
+T=\dfrac{m_{o}}{2}((Lcos(\theta)\dot \theta + \dot x)^{2}+(-Lsin(\theta)\dot \theta)^{2}+\dfrac{m_{u}}{2}\dot x^{2}
+\end{equation}
+\begin{equation}
+V=m_{o}gLcos(\theta)+F_{r}x+V_{ssb}+V_{lsb}
+\end{equation}
+\begin{align}
+\Rightarrow L & =\dfrac{m_{o}}{2}((Lcos(\theta)\dot \theta + \dot x)^{2}+(-Lsin(\theta)\dot \theta)^{2}+\dfrac{m_{u}}{2}\dot x^{2}
+-(m_{o}gLcos(\theta)+F_{r}x+V_{ssb}+V_{lsb})\notag\\ 
+& =\dfrac{m_{o}}{2}((L^{2}\dot \theta^{2} + \dot x^{2}+2Lcos(\theta)\dot \theta\dot x)+\dfrac{m_{u}}{2}\dot x^{2}
+-(m_{o}gLcos(\theta)+F_{r}x+V_{ssb}+V_{lsb})
+\end{align}
+\\
+Where $F_{r}$ models the "Friction Potential", $ V_{ssb} $ the "Sash seat belt Potential" and $ V_{lsb} $ the "Lap seat belt Potential".
+\\\\
+Following the Euler--Lagrange Equation:
+\begin{equation}
+\dfrac{d}{dt}\dfrac{\partial L}{\partial \dot q}=\dfrac{\partial L}{\partial  q}
+\end{equation}
+We obtain:
+\begin{equation}
+m_{o}((L^{2}\ddot \theta +Lcos(\theta)\ddot x -Lsin(\theta)\dot \theta\dot x)-\dfrac {d}{d t}\dfrac {\partial V_{ssb}}{\partial\dot\theta}=
+m_{o}gLsin(\theta)-\dfrac {dV_{ssb}}{d\theta}
+\end{equation}
+\begin{equation}
+m_{o}(\ddot x+Lcos(\theta)\ddot \theta-Lsin(\theta)\dot \theta^{2})+m_{u}\ddot x=-F_{r}-\dfrac {dV_{lsb}}{dx}
+\end{equation}
+ \\Modeling the Sash seat belt as a mechanical damper of constant $b$, the Lap seat belt as a spring of constant $k$ and the Friction force by a dynamic friction coefficient $u_{d}$ times the normal force,, we obtain:
+ \begin{equation}
+ m_{o}((L^{2}\ddot \theta +Lcos(\theta)\ddot x -Lsin(\theta)\dot \theta\dot x)=
+m_{o}gLsin(\theta)-b\dot \theta
+ \end{equation}
+\begin{equation}
+m_{o}(\ddot x+Lcos(\theta)\ddot \theta-Lsin(\theta)\dot \theta^{2})+m_{u}\ddot x=-u_{d}m_{o}g-kx
+\end{equation}
+\end{document}
+
