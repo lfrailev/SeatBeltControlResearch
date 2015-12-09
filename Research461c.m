@@ -2,9 +2,10 @@
 clc
 close all
 clear
-%%
+%% 
  Movie=0; %% If you want a simulation as an output ==> Movie=1
-%%
+
+%% Variables
  global k  %%Lap seat belt as Spring
  global b2 %%Lap seat belt as Damper
  global b  %%Sash seat belt as Damper
@@ -28,8 +29,10 @@ clear
     XD0=Vo/3.6
     refine=1 %% Factor by which to increase ode45 steps
     tlim=1 %% Time at which to end the integration
+    
+    %% Integration
 options = odeset('Events',@ThetaLimit,'Refine',refine);
-[t,y] = ode45(@Research461F,[0 tlim],[0 ThetaD0 0 XD0]);
+[t,y] = ode45(@Research461F,[0 tlim],[0 ThetaD0 0 XD0],options);
 whos
 plot(t,y(:,1))
 xlabel('Time')
