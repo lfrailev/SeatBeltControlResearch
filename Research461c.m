@@ -1,36 +1,30 @@
-%% Reaserch461F
-clc
-close all
 clear
-%% 
- Movie=0; %% If you want a simulation as an output ==> Movie=1
+%%
+ Movie=0;    %%If you want a simulation as an output ==> Movie=1
+%%
+ global k    %%Lap seat belt as Spring
+ global b2   %%Lap seat belt as Damper
+ global b    %%Sash seat belt as Damper
+ global G    %%Consider or not gravity
+ global m1   %%Mass in upper body
+ global m2   %%Mass in lower body
+ global l    %%Height over the hip
+ global us   %%Friction coefficient in the seat
+ global Vo   %%Car velocity before crash in km/h
 
-%% Variables
- global k  %%Lap seat belt as Spring
- global b2 %%Lap seat belt as Damper
- global b  %%Sash seat belt as Damper
- global G  %%Consider or not gravity
- global m1 %%Mass in upper body
- global m2 %%Mass in lower body
- global l  %%Height over the hip
- global us %%Friction coefficient in the seat
- global Vo %%Car velocity before crash in km/h
-
-    k=1800 %%Lap seat belt as Spring
-    b=1200  %%Sash seat belt as Damper
+    k=10    %%Lap seat belt as Spring
+    b=900    %%Sash seat belt as Damper
     b2=6000  %%Lap seat belt as Damper
-    G=1 %%consider (1) or not (0) gravity
-    m1=39 %%Half mass in upper body
-    m2=39 %%Half mass in lower body
-    l=0.69 %% 1.78m tall person, half of height over the hip
-    us=0.5 %%polyester vs polyester
+    G=1      %%consider (1) or not (0) gravity
+    m1=39    %%Half mass in upper body
+    m2=39    %%Half mass in lower body
+    l=0.69   %%1.78m tall person, half of height over the hip
+    us=0.5   %%Polyester vs polyester
     Vo=60
     ThetaD0= Vo/(3.6*l)
     XD0=Vo/3.6
-    refine=1 %% Factor by which to increase ode45 steps
-    tlim=1 %% Time at which to end the integration
-    
-    %% Integration
+    refine=1 %%Factor by which to increase ode45 steps
+    tlim=1   %%Time at which to end the integration
 options = odeset('Events',@ThetaLimit,'Refine',refine);
 [t,y] = ode45(@Research461F,[0 tlim],[0 ThetaD0 0 XD0],options);
 whos
